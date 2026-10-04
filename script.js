@@ -40,7 +40,7 @@ function renderQuestion() {
   const choices = document.getElementById('quiz-choices'); choices.querySelectorAll('label').forEach(el => el.remove());
   q.options.forEach((option,i) => { const label = document.createElement('label'); label.className = 'choice'; const input = document.createElement('input'); input.type = 'radio'; input.name = 'answer'; input.value = i; input.checked = answers[step] === i; const text = document.createElement('span'); text.textContent = option; label.append(input,text); choices.append(label); });
   document.getElementById('quiz-back').disabled = step === 0;
-  document.getElementById('quiz-next').textContent = step === questions.length - 1 ? 'Ver meu resultado →' : 'Continuar →';
+  document.getElementById('quiz-next').textContent = step === questions.length - 1 ? 'Ver meu resultado' : 'Continuar';
   dialog.scrollTop = 0;
 }
 function showQuiz() { document.getElementById('quiz-view').hidden = false; document.getElementById('result-view').hidden = true; dialog.setAttribute('aria-labelledby','diagnostic-title'); renderQuestion(); }
