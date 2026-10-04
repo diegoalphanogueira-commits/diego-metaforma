@@ -1,5 +1,5 @@
 /* Edit these two fields when the photo and custom domain are ready. */
-const SITE_CONFIG = { photo: '', canonical: 'https://diegoalphanogueira-commits.github.io/diego-metaforma/' };
+const SITE_CONFIG = { photo: './assets/diego-nogueira.jpg', canonical: 'https://diegoalphanogueira-commits.github.io/diego-metaforma/' };
 document.documentElement.classList.add('js');
 document.getElementById('year').textContent = new Date().getFullYear();
 if (SITE_CONFIG.photo) {
@@ -43,7 +43,7 @@ function renderQuestion() {
   document.getElementById('quiz-next').textContent = step === questions.length - 1 ? 'Ver meu resultado →' : 'Continuar →';
   dialog.scrollTop = 0;
 }
-function showQuiz() { document.getElementById('quiz-view').hidden = false; document.getElementById('result-view').hidden = true; renderQuestion(); }
+function showQuiz() { document.getElementById('quiz-view').hidden = false; document.getElementById('result-view').hidden = true; dialog.setAttribute('aria-labelledby','diagnostic-title'); renderQuestion(); }
 document.getElementById('open-diagnostic').addEventListener('click', () => { showQuiz(); dialog.showModal(); document.body.classList.add('dialog-open'); });
 document.querySelector('.close-dialog').addEventListener('click', () => dialog.close());
 dialog.addEventListener('close', () => {document.body.classList.remove('dialog-open'); document.getElementById('open-diagnostic').focus();});
@@ -58,6 +58,7 @@ function showResult() {
   const scores = pillars.map((_,p) => questions.reduce((total,q,i) => total + (q.pillar === p ? answers[i] : 0),0) * 25);
   const total = Math.round(scores.reduce((a,b) => a+b,0)/4); const weakest = scores.indexOf(Math.min(...scores));
   document.getElementById('quiz-view').hidden = true;document.getElementById('result-view').hidden = false;
+  dialog.setAttribute('aria-labelledby','result-title');
   document.getElementById('total-score').textContent = total;
   const rows = document.getElementById('pillar-results'); rows.replaceChildren();
   scores.forEach((score,i) => {const row = document.createElement('div');row.className='pillar-row'; const name = document.createElement('span');name.textContent=pillars[i];const track=document.createElement('div');track.className='pillar-track';track.setAttribute('aria-hidden','true');const fill=document.createElement('span');fill.style.width=`${score}%`;track.append(fill);const value=document.createElement('strong');value.textContent=`${score}/100`;row.append(name,track,value);rows.append(row);});
