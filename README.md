@@ -10,10 +10,9 @@ Site estático publicado pelo GitHub Pages a partir de main, na raiz. Domínio p
 - Conexão entre presença digital e atendimento comercial.
 - Soluções de posicionamento digital e Korax.
 - Processo: entender, estruturar, aplicar.
-- Frentes de projetos Jani Podologia e Pensou Seguros, sem números ou depoimentos inventados.
-- Contato direto pelo WhatsApp e Instagram.
+- Contato direto pelo WhatsApp.
 
-O diagnóstico PACT e o terceiro card foram removidos. Não há formulário, coleta de respostas ou rastreamento na página.
+O diagnóstico PACT, o terceiro card, os blocos de projetos e o link do Instagram foram removidos. Não há formulário, coleta de respostas ou rastreamento na página.
 
 ## Arquivos
 
