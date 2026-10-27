@@ -9,15 +9,34 @@
 
   if (year) year.textContent = String(new Date().getFullYear());
 
-  tabs.forEach(tab => tab.addEventListener("click", () => {
-    const key = tab.dataset.tab;
+  const selectTab = key => {
     tabs.forEach(item => {
       const selected = item.dataset.tab === key;
       item.setAttribute("aria-selected", String(selected));
       item.tabIndex = selected ? 0 : -1;
     });
-    panels.forEach(panel => { panel.hidden = panel.dataset.panel !== key; });
-  }));
+    panels.forEach(panel => {
+      panel.hidden = panel.dataset.panel !== key;
+    });
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectTab(tab.dataset.tab));
+    tab.addEventListener("keydown", event => {
+      const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
+      if (!keys.includes(event.key)) return;
+      event.preventDefault();
+      let nextIndex = index;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabs.length - 1;
+      selectTab(tabs[nextIndex].dataset.tab);
+      tabs[nextIndex].focus();
+    });
+  });
+  document.querySelectorAll("[data-open-tab]").forEach(link => {
+    link.addEventListener("click", () => selectTab(link.dataset.openTab));
+  });
 
   const nameInput = document.querySelector("#lead-name");
   const phoneInput = document.querySelector("#lead-phone");
